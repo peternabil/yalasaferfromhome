@@ -12,7 +12,7 @@ let slider;
 
 function preload(){
   bodypix = ml5.bodyPix({
-    architecture: 'ResNet50',
+    architecture: 'MobileNetV1',
     outputStride: 16,
     quantBytes: 4
   },ready);
