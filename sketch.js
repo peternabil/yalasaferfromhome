@@ -20,6 +20,7 @@ function preload(){
 }
 function ready(){
   console.log("MobileNetV1 Model is ready!!!");
+  console.log("edit 1");
 }
 function bgadded(){
   console.log("bg added");
@@ -122,7 +123,7 @@ function handleFile(file) {
     // image(img, 0, 0, width, height);
     bodypix.segment(img,{
     flipHorizontal: false,
-    internalResolution: 'high',
+    internalResolution: 'low',
     segmentationThreshold: 0.5
   },resulted);
 
