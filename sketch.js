@@ -14,7 +14,8 @@ function preload(){
   bodypix = ml5.bodyPix({
     architecture: 'MobileNetV1',
     outputStride: 16,
-    quantBytes: 4
+    multiplier: 0.75,
+    quantBytes: 2
   },ready);
 }
 function ready(){
