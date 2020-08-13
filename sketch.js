@@ -20,7 +20,7 @@ function preload(){
 }
 function ready(){
   console.log("MobileNetV1 Model is ready!!!");
-  console.log("edit 1");
+  console.log("edit 2");
 }
 function bgadded(){
   console.log("bg added");
