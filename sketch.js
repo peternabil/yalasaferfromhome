@@ -42,7 +42,7 @@ function setup() {
   button = createButton('Download your Picture');
   button.style('height','30px');
   button.mousePressed(download_img);
-  bg_can = createCanvas(640,480);
+  bg_can = createCanvas(windowWidth,480);
   background(0);
 }
 
