@@ -9,18 +9,17 @@ let bg;
 let posx,posy;
 let scale;
 let slider;
+let button;
 
 function preload(){
   bodypix = ml5.bodyPix({
     architecture: 'MobileNetV1',
     outputStride: 16,
-    multiplier: 0.75,
-    quantBytes: 2
+    quantBytes: 4
   },ready);
 }
 function ready(){
-  console.log("MobileNetV1 Model is ready!!!");
-  console.log("edit 2");
+  console.log("Model is ready!!!");
 }
 function bgadded(){
   console.log("bg added");
@@ -34,15 +33,18 @@ function setup() {
   // slider = createSlider(0, 255, 100);
   // slider.position(10, 10);
   // slider.style('width', '100px');
-  createElement("h1", "Choose a background")
   input_bg = createFileInput(handlebg);
-  createElement("h1", "Select your selfie")
+  input_bg.parent('upbg')
   input_person = createFileInput(handleFile);
-  createElement("h1", "Download your Picture")
+  input_person.parent('upselfie')
   button = createButton('Download your Picture');
-  button.style('height','30px');
+  button.style('height','60px');
   button.mousePressed(download_img);
-  bg_can = createCanvas(windowWidth,480);
+  button.class('btn btn-primary');
+  button.parent('download')
+  bg_can = createCanvas(windowWidth*0.8,480)
+  // .style('padding','20px 20px 20px 40px');
+  bg_can.parent('mycanvas')
   background(0);
 }
 
@@ -89,7 +91,11 @@ function draw(){
   // console.log(Math.round(slider.value()*100/255));
   if(segmentation){
     if (bg) {
-      image(bg, 0, 0, width, height);
+      if (width>height) {
+        image(bg, 0, 0, width, bg.height*width/bg.width);
+      }else{
+        image(bg, 0, 0, bg.width*height/bg.height,height);
+      }
     }else{
       background(0);
     }
@@ -97,7 +103,12 @@ function draw(){
     image(segmentation.backgroundMask,posx , posy, segmentation.backgroundMask.width*height/segmentation.backgroundMask.height,height)
   }else{
     if (bg) {
-      image(bg, 0, 0, width, height);
+      if (width>height) {
+        image(bg, 0, 0, width, bg.height*width/bg.width);
+      }else{
+        image(bg, 0, 0, bg.width*height/bg.height,height);
+      }
+
     }else{
       background(0);
     }
@@ -123,7 +134,7 @@ function handleFile(file) {
     // image(img, 0, 0, width, height);
     bodypix.segment(img,{
     flipHorizontal: false,
-    internalResolution: 'low',
+    internalResolution: 'high',
     segmentationThreshold: 0.5
   },resulted);
 
